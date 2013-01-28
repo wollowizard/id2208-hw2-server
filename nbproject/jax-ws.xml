@@ -10,6 +10,9 @@
     <service name="bookTicket">
       <implementation-class>pck.bookTicket</implementation-class>
     </service>
+    <service name="Issue">
+      <implementation-class>pck.Issue</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
