@@ -5,12 +5,15 @@
 package pck;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
  * @author alfredo
  */
 public class Route {
+    
+    
     
     public ArrayList<Flight> flightsOfRoute;
 
@@ -31,6 +34,5 @@ public class Route {
     }
     
     
-            
     
 }

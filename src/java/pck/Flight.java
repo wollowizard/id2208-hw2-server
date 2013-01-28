@@ -4,7 +4,6 @@
  */
 package pck;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -13,9 +12,11 @@ import java.util.Iterator;
  *
  * @author alfredo
  */
-public class Flight implements Serializable {
+public class Flight {
 
+   
     public static ArrayList<Flight> flights = new ArrayList<Flight>();
+    public String id;
     public String from;
     public String to;
     public Date date;
@@ -23,6 +24,9 @@ public class Flight implements Serializable {
     public Double price;
 
     public Flight(String from, String to, Date date, Integer freeplaces, Double price) {
+        
+        id=from+to+date.toString();
+        
         this.from = from;
         this.to = to;
         this.date = date;
@@ -42,7 +46,7 @@ public class Flight implements Serializable {
         f = new Flight("Rome", "Berlin",
                 new Date(2013, 2, 5), 90, 150.0);
         flights.add(f);
-        
+
         f = new Flight("Berlin", "Paris",
                 new Date(2013, 2, 5), 100, 125.5);
         flights.add(f);
@@ -50,7 +54,7 @@ public class Flight implements Serializable {
         f = new Flight("Rome", "Barcelona",
                 new Date(2013, 2, 5), 100, 120.0);
         flights.add(f);
-        
+
         f = new Flight("Barcelona", "Madrid",
                 new Date(2013, 2, 5), 100, 120.0);
         flights.add(f);
@@ -61,19 +65,22 @@ public class Flight implements Serializable {
 
     }
 
-    public ArrayList<Flight> getDirectFlights(String from, String to) {
-        ArrayList<Flight> list = new ArrayList<Flight>();
+    public static ArrayList<Route> getDirectFlights(String from, String to) {
+        ArrayList<Route> list = new ArrayList<Route>();
+
         for (Iterator<Flight> it = flights.iterator(); it.hasNext();) {
             Flight flight = it.next();
             if (flight.from.equals(from) && flight.to.equals(to)) {
-                list.add(flight);
+                Route r = new Route();
+                r.flightsOfRoute.add(flight);
+                list.add(r);
             }
         }
         return list;
 
     }
 
-    public ArrayList<Route> getIndirectFlights(String from, String to) {
+    public static ArrayList<Route> getIndirectFlights(String from, String to) {
         ArrayList<Route> list = new ArrayList<Route>();
         for (Iterator<Flight> it1 = flights.iterator(); it1.hasNext();) {
             Route route = new Route();
@@ -92,14 +99,11 @@ public class Flight implements Serializable {
         }
         return list;
     }
-    
+
     //Printing Functions
-    public void printItineraries(ArrayList<Flight> list){
-        
+    public void printItineraries(ArrayList<Flight> list) {
     }
-    
-    public void printFlightsInfo(ArrayList<Flight> list){
-        
+
+    public void printFlightsInfo(ArrayList<Flight> list) {
     }
-    
 }

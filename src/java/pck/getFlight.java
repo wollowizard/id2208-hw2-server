@@ -21,6 +21,9 @@ public class getFlight {
     @WebMethod(operationName = "operation")
     public Flight operation(@WebParam(name = "parameter") String parameter, @WebParam(name = "parameter1") String parameter1) {
         //TODO write your implementation code here:
+        
+        
+        
         return null;
     }
 }
