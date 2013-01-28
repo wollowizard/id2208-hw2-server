@@ -74,16 +74,18 @@ public class Flight implements Serializable {
     }
 
     public ArrayList<Route> getIndirectFlights(String from, String to) {
-        ArrayList<Flight> list = new ArrayList<Flight>();
+        ArrayList<Route> list = new ArrayList<Route>();
         for (Iterator<Flight> it1 = flights.iterator(); it1.hasNext();) {
+            Route route = new Route();
             Flight flight1 = it1.next();
             if (flight1.from.equals(from)) {
                 String through = flight1.to;
-                for (Iterator<Flight> it2 = list.iterator(); it2.hasNext();) {
+                for (Iterator<Flight> it2 = flights.iterator(); it2.hasNext();) {
                     Flight flight2 = it2.next();
                     if (flight2.from.equals(through) && flight2.to.equals(to)) {
-                        list.add(flight1);
-                        list.add(flight2);
+                        route.add(flight1);
+                        route.add(flight2);
+                        list.add(route);
                     }
                 }
             }
