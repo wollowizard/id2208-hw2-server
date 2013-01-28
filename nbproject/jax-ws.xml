@@ -4,8 +4,8 @@
     <service name="getToken">
       <implementation-class>pck.getToken</implementation-class>
     </service>
-    <service name="getFlight">
-      <implementation-class>pck.getFlight</implementation-class>
+    <service name="itinerary">
+      <implementation-class>pck.itinerary</implementation-class>
     </service>
   </services>
   <clients/>

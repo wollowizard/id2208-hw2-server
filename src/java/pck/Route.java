@@ -5,7 +5,6 @@
 package pck;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  *
@@ -16,9 +15,13 @@ public class Route {
     
     
     public ArrayList<Flight> flightsOfRoute;
+    public String id="Route-";
 
     public Route() {
         flightsOfRoute=new ArrayList<Flight>();
+        for(Flight f : flightsOfRoute){
+            id+=f.id;
+        }
     }
     
     public void add(Flight flight){

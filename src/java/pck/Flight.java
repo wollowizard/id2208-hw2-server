@@ -16,7 +16,7 @@ public class Flight {
 
    
     public static ArrayList<Flight> flights = new ArrayList<Flight>();
-    public String id;
+    public String id="Flight-";
     public String from;
     public String to;
     public Date date;
