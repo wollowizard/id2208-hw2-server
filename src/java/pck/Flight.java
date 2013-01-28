@@ -77,7 +77,6 @@ public class Flight {
             }
         }
         return list;
-
     }
 
     public static ArrayList<Route> getIndirectFlights(String from, String to) {

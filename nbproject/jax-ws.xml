@@ -7,6 +7,9 @@
     <service name="itinerary">
       <implementation-class>pck.itinerary</implementation-class>
     </service>
+    <service name="bookTicket">
+      <implementation-class>pck.bookTicket</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
