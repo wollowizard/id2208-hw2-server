@@ -42,10 +42,10 @@ public class findPrice {
         }
         
         Route route = new Route();
-        for (Flight f : flights.list) {
+       /* for (Flight f : flights.list) {
             FlightInfo fi = FlightInfo.getFlightInfo(f);
             route.add(fi);
-        }
+        }*/
         return route;
     }
     /*
