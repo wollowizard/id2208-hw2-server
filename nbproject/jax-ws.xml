@@ -13,6 +13,9 @@
     <service name="Issue">
       <implementation-class>pck.Issue</implementation-class>
     </service>
+    <service name="findPrice">
+      <implementation-class>pck.findPrice</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>
