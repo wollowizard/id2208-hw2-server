@@ -12,45 +12,41 @@ import java.util.Iterator;
  * @author alfredo
  */
 public class Flight {
-  
+
     public String from;
     public String to;
-    
 
     public Flight(String from, String to) {
 
         this.from = from;
         this.to = to;
-        }
+    }
 
-    public static ArrayList<Route> getDirectFlights(String from, String to) {
-        
-        ArrayList<Route> list = new ArrayList<Route>();
-        
+    public static ArrayList<ArrayList<Flight>> getDirectFlights(String from, String to) {
+        ArrayList<Flight> itinerary = new ArrayList<Flight>();
+        ArrayList<ArrayList<Flight>> list = new ArrayList<ArrayList<Flight>>();
+
         for (Flight flight : DB.flights) {
-            
             if (flight.from.equals(from) && flight.to.equals(to)) {
-                Route r = new Route();
-                r.flightsOfRoute.add(flight);
-                list.add(r);
+                itinerary.add(flight);
+                list.add(itinerary);
             }
         }
         return list;
     }
 
-    public static ArrayList<Route> getIndirectFlights(String from, String to) {
-        ArrayList<Route> list = new ArrayList<Route>();
-        for (Iterator<Flight> it1 = DB.flights.iterator(); it1.hasNext();) {
-            Route route = new Route();
-            Flight flight1 = it1.next();
+    public static ArrayList<ArrayList<Flight>> getIndirectFlights(String from, String to) {
+        ArrayList<Flight> itinerary = new ArrayList<Flight>();
+        ArrayList<ArrayList<Flight>> list = new ArrayList<ArrayList<Flight>>();
+
+        for (Flight flight1 : DB.flights) {
             if (flight1.from.equals(from)) {
                 String through = flight1.to;
-                for (Iterator<Flight> it2 = DB.flights.iterator(); it2.hasNext();) {
-                    Flight flight2 = it2.next();
-                    if (flight2.from.equals(through) && flight2.to.equals(to)) {
-                        route.add(flight1);
-                        route.add(flight2);
-                        list.add(route);
+                for (Flight flight2 : DB.flights) {
+                    if (flight2.to.equals(to)) {
+                        itinerary.add(flight1);
+                        itinerary.add(flight2);
+                        list.add(itinerary);
                     }
                 }
             }
