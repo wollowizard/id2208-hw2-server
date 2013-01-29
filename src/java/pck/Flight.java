@@ -24,19 +24,22 @@ public class Flight {
 
     public static ArrayList<FlightsList> getDirectFlights(String from, String to) {
         //FlightsList itinerary = new FlightsList();
+        ArrayList<Flight> itinerary=new ArrayList<Flight>();
         ArrayList<FlightsList> list = new ArrayList<FlightsList>();
         for (Flight flight : DB.flights) {
-            FlightsList itinerary = new FlightsList();
             if (flight.from.equals(from) && flight.to.equals(to)) {
                 itinerary.add(flight);
-                list.add(itinerary);
+                FlightsList fl = new FlightsList(itinerary);
+                list.add(fl);
             }
         }
+        
+        
         return list;
     }
 
     public static ArrayList<FlightsList> getIndirectFlights(String from, String to) {
-        FlightsList itinerary = new FlightsList();
+        ArrayList<Flight> itinerary;
         ArrayList<FlightsList> list = new ArrayList<FlightsList>();
 
         for (Flight flight1 : DB.flights) {
@@ -44,13 +47,14 @@ public class Flight {
                 String through = flight1.to;
                 for (Flight flight2 : DB.flights) {
                     if (flight2.to.equals(to) && flight2.from.equals(through)) {
+                        itinerary=new ArrayList<Flight>();
                         itinerary.add(flight1);
                         itinerary.add(flight2);
-                        list.add(itinerary);
-                        break;
+                        FlightsList fl = new FlightsList(itinerary);
+                        list.add(fl);
                     }
                 }
-                itinerary = new FlightsList();
+                
             }
         }
         return list;
