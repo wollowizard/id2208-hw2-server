@@ -60,6 +60,9 @@ public class DB {
         f1 = new FlightInfo(new Date(2013, 2, 5), 100, 120.0, f);
         flights.add(f);
         flightsInfo.add(f1);
+        
+        users.add(new User("gerard", "1234"));
+        users.add(new User("alfredo", "1234"));
 
     }
 }

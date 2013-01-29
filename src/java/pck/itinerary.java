@@ -22,7 +22,13 @@ public class itinerary {
      * Web service operation
      */
     @WebMethod(operationName = "getItinerary")
-    public ArrayList<FlightsList> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to) {
+    public ArrayList<FlightsList> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+        
+        if(!Authenticator.Autheticate(tokenid)){
+            throw new AuthenticationException();
+        }
+        
+        
         ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
         if (listOfLinks.isEmpty()) {
             listOfLinks = Flight.getIndirectFlights(from, to);

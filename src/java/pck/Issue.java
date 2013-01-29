@@ -21,14 +21,17 @@ public class Issue {
      * Web service operation
      */
     @WebMethod(operationName = "issueTicket")
-    public Ticket issueTicket(@WebParam(name = "tck") String ticketId) {
+    public Ticket issueTicket(@WebParam(name = "tck") String ticketId, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+        
+        if(!Authenticator.Autheticate(tokenid)){
+            throw new AuthenticationException();
+        }
         //TODO write your implementation code here:
         for(Ticket t : DB.TicketDB){
             if(ticketId.equals(t.id)){
                 return t;
             }
         }
-        
         return null;    
     }
 }

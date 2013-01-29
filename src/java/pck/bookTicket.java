@@ -23,7 +23,11 @@ public class bookTicket {
      * Web service operation
      */
     @WebMethod(operationName = "book")
-    public String book(@WebParam(name = "route") Route route, @WebParam(name = "cardNumber") String cardNumber) {
+    public String book(@WebParam(name = "route") Route route, @WebParam(name = "cardNumber") String cardNumber, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+        
+        if(!Authenticator.Autheticate(tokenid)){
+            throw new AuthenticationException();
+        }
 
         for (FlightInfo f : route.flightsOfRoute) {
             f.freeplaces--;

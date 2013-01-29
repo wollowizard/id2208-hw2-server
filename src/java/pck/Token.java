@@ -25,5 +25,7 @@ public class Token {
         cal.getTime();
         cal.add(Calendar.MINUTE, 60);
         validTo = cal.getTime();
+        
+        DB.tokens.add(this);
     }
 }

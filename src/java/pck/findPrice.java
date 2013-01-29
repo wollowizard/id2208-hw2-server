@@ -23,7 +23,11 @@ public class findPrice {
      * Web service operation
      */
     @WebMethod(operationName = "findPrice")
-    public Route findPrice(@WebParam(name = "flights") FlightsList flights, @WebParam(name = "date") String date) {
+    public Route findPrice(@WebParam(name = "flights") FlightsList flights, @WebParam(name = "date") String date, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+        
+        if(!Authenticator.Autheticate(tokenid)){
+            throw new AuthenticationException();
+        }
         //TODO write your implementation code here:
         int IDate, IMonth, IYear;
         IDate = Integer.parseInt(date.split("/")[0]);

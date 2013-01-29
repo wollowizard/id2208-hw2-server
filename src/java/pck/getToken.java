@@ -21,14 +21,14 @@ public class getToken {
     @WebMethod(operationName = "getTkn")
     public String getTkn(@WebParam(name = "usr") String usr, @WebParam(name = "pwd") String pwd) {
         //TODO write your implementation code here:
-        if(DB.users.contains(new User(usr, pwd))){  
-            return (new Token().id);
+        for(User u : DB.users){
+            if(u.username.equals(usr)&& u.password.equals(pwd)){
+                return (new Token().id);
+            }
         }
-        else {
-            return "INVALID USERNAME OR PASSWORD";
-        }
-        
-        
+       
+        return "INVALID USERNAME OR PASSWORD";
+      
     }
 
 }
