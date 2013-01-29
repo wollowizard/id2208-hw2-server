@@ -16,6 +16,9 @@ public class DB {
     public static ArrayList<Ticket> TicketDB = new ArrayList<Ticket>();
     public static ArrayList<Flight> flights = new ArrayList<Flight>();
     public static ArrayList<FlightInfo> flightsInfo = new ArrayList<FlightInfo>();
+    public static ArrayList<User> users = new ArrayList<User>();
+    
+    public static ArrayList<Token> tokens=new ArrayList<Token>();
 
     static {
         DB.populate();
