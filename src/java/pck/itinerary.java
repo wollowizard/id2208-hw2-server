@@ -21,6 +21,7 @@ public class itinerary {
      */
     @WebMethod(operationName = "getItinerary")
     public ArrayList<Route> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to) {
+        
         ArrayList<Route> arr=Flight.getDirectFlights(from, to);
         if(arr.isEmpty()){
             arr=Flight.getIndirectFlights(from, to);
