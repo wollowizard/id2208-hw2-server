@@ -10,25 +10,24 @@ import java.util.ArrayList;
  *
  * @author alfredo
  */
-public class Route {
+    public class Route {
     
-    
-    
-    public ArrayList<Flight> flightsOfRoute;
+       
+    public ArrayList<FlightInfo> flightsOfRoute;
     public String id="Route-";
 
     public Route() {
-        flightsOfRoute=new ArrayList<Flight>();
-        for(Flight f : flightsOfRoute){
+        flightsOfRoute=new ArrayList<FlightInfo>();
+        for(FlightInfo f : flightsOfRoute){
             id+=f.id;
         }
     }
     
-    public void add(Flight flight){
+    public void add(FlightInfo flight){
         flightsOfRoute.add(flight);
     }
     
-    public Flight get(int position){
+    public FlightInfo get(int position){
         return flightsOfRoute.get(position);
     }
     

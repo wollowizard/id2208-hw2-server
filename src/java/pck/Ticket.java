@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Ticket {
     
-    public static ArrayList<Ticket> TicketDB= new ArrayList<Ticket>();
+    
     static Integer count=0;
     
     public String id;

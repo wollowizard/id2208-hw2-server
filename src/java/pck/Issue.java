@@ -23,7 +23,7 @@ public class Issue {
     @WebMethod(operationName = "issueTicket")
     public Ticket issueTicket(@WebParam(name = "tck") String ticketId) {
         //TODO write your implementation code here:
-        for(Ticket t : Ticket.TicketDB){
+        for(Ticket t : DB.TicketDB){
             if(ticketId.equals(t.id)){
                 return t;
             }
