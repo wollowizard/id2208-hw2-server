@@ -15,8 +15,8 @@ public class FlightInfo {
     public Date date;
     public Integer freeplaces;
     public Double price;
-    Flight flight;
-    String id = "Flight-";
+    public Flight flight;
+    public String id = "Flight-";
 
     public FlightInfo(Date date, Integer freeplaces, Double price, Flight f) {
 

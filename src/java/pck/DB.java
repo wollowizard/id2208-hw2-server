@@ -26,7 +26,6 @@ public class DB {
 
     public static void populate() {
         Flight f = new Flight("Barcelona", "Stockholm");
-
         FlightInfo f1 = new FlightInfo(new Date(2013, 2, 5), 100, 120.0, f);
         flights.add(f);
         flightsInfo.add(f1);

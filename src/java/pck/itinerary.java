@@ -15,7 +15,7 @@ import javax.jws.WebParam;
  * @author alfredo
  */
 @WebService(serviceName = "itinerary")
-@HandlerChain(file="handler-chain.xml")
+@HandlerChain(file = "handler-chain.xml")
 public class itinerary {
 
     /**
@@ -23,19 +23,15 @@ public class itinerary {
      */
     @WebMethod(operationName = "getItinerary")
     public ArrayList<FlightsList> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to) {
-        /*ArrayList<ArrayList<Flight>> arr=Flight.getDirectFlights(from, to);
-        if(arr.isEmpty()){
-            arr=Flight.getIndirectFlights(from, to);
-        }
-        return arr;*/
-        
         ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
-        if(listOfLinks.isEmpty()){
-            listOfLinks=Flight.getIndirectFlights(from, to);
+        if (listOfLinks.isEmpty()) {
+            listOfLinks = Flight.getIndirectFlights(from, to);
         }
+        /*
+         if(listOfLinks.isEmpty()){
+         listOfLinks = new ArrayList<FlightsList>();
+         }
+         */
         return listOfLinks;
     }
-
-
 }
-
