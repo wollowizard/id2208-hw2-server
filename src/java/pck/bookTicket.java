@@ -22,7 +22,7 @@ public class bookTicket {
      */
     @WebMethod(operationName = "book")
     public String book(@WebParam(name = "route") Route route, @WebParam(name = "cardNumber") String cardNumber) {
-        for (Flight f : route.flightsOfRoute){
+        for (FlightInfo f : route.flightsOfRoute){
             f.freeplaces--;
         }
         Ticket ticket = new Ticket(route, cardNumber);  
