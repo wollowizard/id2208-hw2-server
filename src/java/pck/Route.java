@@ -24,9 +24,9 @@ import java.util.ArrayList;
         }*/
     }
     
-    public void add(FlightInfo flight){
-        flightsOfRoute.add(flight);
-        id+=flight.id;
+    public void add(FlightInfo fi){
+        flightsOfRoute.add(fi);
+        id+=fi.id;
     }
     
     public FlightInfo get(int position){
