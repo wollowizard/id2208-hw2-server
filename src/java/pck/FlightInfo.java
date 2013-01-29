@@ -27,4 +27,16 @@ public class FlightInfo {
         this.price = price;
 
     }
+    
+    public static FlightInfo getFlightInfo(Flight flight){
+        FlightInfo myFi=null;
+        for (FlightInfo fi : DB.flightsInfo){
+            if(fi.flight.from.equals(flight.from) && 
+                    fi.flight.to.equals(flight.to)){
+                myFi=fi;
+                break;
+            }
+        }
+        return myFi; 
+    }
 }

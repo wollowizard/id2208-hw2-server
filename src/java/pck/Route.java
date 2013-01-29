@@ -17,14 +17,16 @@ import java.util.ArrayList;
     public String id="Route-";
 
     public Route() {
-        flightsOfRoute=new ArrayList<FlightInfo>();
-        for(FlightInfo f : flightsOfRoute){
+        this.flightsOfRoute=new ArrayList<FlightInfo>();
+        id="Route-";
+        /*for(FlightInfo f : flightsOfRoute){
             id+=f.id;
-        }
+        }*/
     }
     
     public void add(FlightInfo flight){
         flightsOfRoute.add(flight);
+        id+=flight.id;
     }
     
     public FlightInfo get(int position){
