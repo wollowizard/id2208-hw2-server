@@ -27,7 +27,7 @@ public class bookTicket {
             f.freeplaces--;
         }
         Ticket ticket = new Ticket(route, cardNumber);  
-        Ticket.TicketDB.add(ticket);
+        DB.TicketDB.add(ticket);
         
         return ticket.id;
     }

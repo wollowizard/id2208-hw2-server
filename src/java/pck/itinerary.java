@@ -5,6 +5,7 @@
 package pck;
 
 import java.util.ArrayList;
+import javax.jws.HandlerChain;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -14,6 +15,7 @@ import javax.jws.WebParam;
  * @author alfredo
  */
 @WebService(serviceName = "itinerary")
+@HandlerChain(file="handler-chain.xml")
 public class itinerary {
 
     /**
