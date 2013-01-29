@@ -4,7 +4,6 @@
  */
 package pck;
 
-import java.util.Iterator;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
