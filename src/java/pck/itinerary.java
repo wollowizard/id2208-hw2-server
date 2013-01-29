@@ -22,13 +22,35 @@ public class itinerary {
      * Web service operation
      */
     @WebMethod(operationName = "getItinerary")
-    public ArrayList<ArrayList<Flight>> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to) {
-        ArrayList<ArrayList<Flight>> arr=Flight.getDirectFlights(from, to);
+    public ArrayList<FlightsList> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to) {
+        /*ArrayList<ArrayList<Flight>> arr=Flight.getDirectFlights(from, to);
         if(arr.isEmpty()){
             arr=Flight.getIndirectFlights(from, to);
         }
-        return arr;
+        return arr;*/
         
+        ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
+        if(listOfLinks.isEmpty()){
+            listOfLinks=Flight.getIndirectFlights(from, to);
+        }
+        return listOfLinks;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "operation")
+    public ArrayList<ArrayList<String>> operation(@WebParam(name = "from") String from, @WebParam(name = "to") String to) {
+        //TODO write your implementation code here:
+        ArrayList<String> arr = new ArrayList<String>();
+        arr.add(from);
+        arr.add(to);
+        arr.add(from);
+        arr.add(to);
+        ArrayList<ArrayList<String>> arr2 = new ArrayList<ArrayList<String>>();
+        arr2.add(arr);
+        arr2.add(arr);
+        return arr2;
     }
 }
 
