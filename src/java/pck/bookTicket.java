@@ -18,31 +18,17 @@ import javax.ejb.Stateless;
 @WebService(serviceName = "bookTicket")
 @Stateless()
 public class bookTicket {
-
     /**
      * Web service operation
      */
     @WebMethod(operationName = "book")
-    public String book(@WebParam(name = "route") Route route, @WebParam(name = "cardNumber") String cardNumber, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
-        
+    public Ticket book(@WebParam(name = "from") String from, @WebParam(name = "to") String to, @WebParam(name = "flightsId") String flightsId,
+    @WebParam(name = "date") String date, @WebParam(name = "cardNumber") String cardNumber, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+       
         if(!Authenticator.Autheticate(tokenid)){
             throw new AuthenticationException();
         }
-
-        for (FlightInfo f : route.flightsOfRoute) {
-            f.freeplaces--;
-        }
-        Ticket ticket = new Ticket(route, cardNumber);
-        DB.TicketDB.add(ticket);
-
-        return ticket.id;
-    }
-
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "book2")
-    public Ticket book2(@WebParam(name = "from") String from, @WebParam(name = "to") String to, @WebParam(name = "date") String date, @WebParam(name = "cardNumber") String cardNumber) {
+        
         int IDate, IMonth, IYear;
         IDate = Integer.parseInt(date.split("/")[0]);
         IMonth = Integer.parseInt(date.split("/")[1]);
@@ -53,12 +39,17 @@ public class bookTicket {
         if (listOfLinks.isEmpty()) {
             listOfLinks = Flight.getIndirectFlights(from, to);
         }
-        //We use the first FlightsList of the ListOfLinks
-        //Will there be more than possible FlightsList for the same tuple from/to???
         Route route = new Route();
         if (!listOfLinks.isEmpty()) {
-            FlightsList flights = listOfLinks.get(0);
-            for (Flight f : flights.list) {
+            FlightsList myFl = null;
+            
+            for (FlightsList fl : listOfLinks) {
+                if (fl.id.equals(flightsId)) {
+                    myFl = fl;
+                    break;
+                }
+            }
+            for (Flight f : myFl.list) {
                 FlightInfo fi = FlightInfo.getFlightInfo(f);
                 if (fi.date.equals(myDate)) {
                     route.add(fi);
@@ -75,4 +66,24 @@ public class bookTicket {
         //return ticket.id;
         return ticket;
     }
+    
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "book2")
+    public String book2(@WebParam(name = "route") Route route, @WebParam(name = "cardNumber") String cardNumber, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+        
+        if(!Authenticator.Autheticate(tokenid)){
+            throw new AuthenticationException();
+        }
+
+        for (FlightInfo f : route.flightsOfRoute) {
+            f.freeplaces--;
+        }
+        Ticket ticket = new Ticket(route, cardNumber);
+        DB.TicketDB.add(ticket);
+
+        return ticket.id;
+    }
+
 }
