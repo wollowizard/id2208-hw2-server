@@ -17,6 +17,7 @@ import java.util.ArrayList;
     public String from;
     public String to;
     public String id="Route-";
+    
 
     public Route(ArrayList<FlightInfo> flightInfoArray) {
         this.flightsOfRoute=flightInfoArray;
