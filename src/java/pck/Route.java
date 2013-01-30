@@ -15,6 +15,7 @@ import java.util.ArrayList;
        
     public ArrayList<FlightInfo> flightsOfRoute;
     public String id="Route-";
+    public String flightsId = "";
 
     public Route() {
         this.flightsOfRoute=new ArrayList<FlightInfo>();
@@ -27,6 +28,8 @@ import java.util.ArrayList;
     public void add(FlightInfo fi){
         flightsOfRoute.add(fi);
         id+=fi.id;
+        flightsId+=fi.flight.from;
+        flightsId+=fi.flight.to;
     }
     
     public FlightInfo get(int position){
@@ -37,6 +40,20 @@ import java.util.ArrayList;
         return flightsOfRoute.size();
     }
     
+    public String getFrom(){ 
+        return flightsOfRoute.get(0).flight.from;
+    }
     
+    public String getTo(){
+        int pos = flightsOfRoute.size() - 1;
+        return flightsOfRoute.get(pos).flight.to;
+    }
+    
+    public String getDate(){
+        String date = flightsOfRoute.get(0).date.getDate()+"/"+
+                flightsOfRoute.get(0).date.getMonth()+"/"+
+                flightsOfRoute.get(0).date.getYear();
+        return date;
+    }
     
 }
