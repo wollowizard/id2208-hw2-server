@@ -24,54 +24,58 @@ import javax.jws.WebService;
 @Stateless()
 public class findPrice {
 
-    
     /**
      * Web service operation
      */
     @WebMethod(operationName = "findPrice")
-    public Route findPrice(@WebParam(name = "from") String from, @WebParam(name = "to") String to, 
-    @WebParam(name = "flightsId") String flightsId, @WebParam(name = "date") String date, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
+    public Route findPrice(@WebParam(name = "from") String from, @WebParam(name = "to") String to,
+            @WebParam(name = "flightsId") String flightsId, @WebParam(name = "date") String date, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
 
+        
         if (!Authenticator.Autheticate(tokenid)) {
             throw new AuthenticationException();
         }
         DateFormat format;
-        Date myDate=null;
+        Date myDate = null;
+        Route route=null;
+        
         format = new SimpleDateFormat("dd/MM/yyyy");
         try {
             myDate = (Date) format.parse(date);
-            
+
+            ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
+            if (listOfLinks.isEmpty()) {
+                listOfLinks = Flight.getIndirectFlights(from, to);
+            }
+            ArrayList<FlightInfo> flights = new ArrayList<FlightInfo>();
+            if (!listOfLinks.isEmpty()) {
+                FlightsList myFl = null;
+
+                for (FlightsList fl : listOfLinks) {
+                    if (fl.id.equals(flightsId)) {
+                        myFl = fl;
+                        break;
+                    }
+                }
+                for (Flight f : myFl.list) {
+                    FlightInfo fi = FlightInfo.getFlightInfo(f);
+                    System.out.println("DATE " + fi.date.toString());
+                    System.out.println("MYDATE " + myDate.toString());
+                    if (fi.date.equals(myDate)) {
+                        flights.add(fi);
+                    }
+                }
+            }
+            route = new Route(flights);
+
         } catch (ParseException ex) {
-            Logger.getLogger(bookTicket.class.getName()).log(Level.SEVERE, null, ex);
+            route=new Route(new ArrayList<FlightInfo>());
         }
 
-        ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
-        if (listOfLinks.isEmpty()) {
-            listOfLinks = Flight.getIndirectFlights(from, to);
-        }
-        ArrayList<FlightInfo> flights = new ArrayList<FlightInfo>();
-        if (!listOfLinks.isEmpty()) {
-            FlightsList myFl = null;
-            
-            for (FlightsList fl : listOfLinks) {
-                if (fl.id.equals(flightsId)) {
-                    myFl = fl;
-                    break;
-                }
-            }
-            for (Flight f : myFl.list) {
-                FlightInfo fi = FlightInfo.getFlightInfo(f);
-                System.out.println("DATE "+fi.date.toString());
-                System.out.println("MYDATE " +myDate.toString());
-                if (fi.date.equals(myDate)) {
-                    flights.add(fi);
-                }
-            }
-        }
-        Route route = new Route(flights);
+
         return route;
     }
-    
+
     /**
      * Web service operation
      */
@@ -88,7 +92,7 @@ public class findPrice {
         IYear = Integer.parseInt(date.split("/")[2]);
         Date myDate = new Date(IYear, IMonth, IDate);
 
-        
+
         ArrayList<FlightInfo> flightsInfoArr = new ArrayList<FlightInfo>();
         for (Flight f : flights.list) {
             FlightInfo fi = FlightInfo.getFlightInfo(f);
@@ -99,5 +103,4 @@ public class findPrice {
         Route route = new Route(flightsInfoArr);
         return route;
     }
-    
 }
