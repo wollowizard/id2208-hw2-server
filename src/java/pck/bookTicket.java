@@ -39,7 +39,8 @@ public class bookTicket {
         if (listOfLinks.isEmpty()) {
             listOfLinks = Flight.getIndirectFlights(from, to);
         }
-        Route route = new Route();
+        
+        ArrayList<FlightInfo> flightinfoarr=new ArrayList<FlightInfo>(); 
         if (!listOfLinks.isEmpty()) {
             FlightsList myFl = null;
             
@@ -52,10 +53,11 @@ public class bookTicket {
             for (Flight f : myFl.list) {
                 FlightInfo fi = FlightInfo.getFlightInfo(f);
                 if (fi.date.equals(myDate)) {
-                    route.add(fi);
+                    flightinfoarr.add(fi);
                 }
             }
         }
+        Route route = new Route(flightinfoarr);
 
         for (FlightInfo f : route.flightsOfRoute) {
             f.freeplaces--;

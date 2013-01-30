@@ -31,6 +31,7 @@ public class DB {
         flightsInfo.add(f1);
 
         f = new Flight("Stockholm", "Berlin");
+        
         f1 = new FlightInfo(new Date(2013, 2, 5), 100, 110.0, f);
         flights.add(f);
         flightsInfo.add(f1);
