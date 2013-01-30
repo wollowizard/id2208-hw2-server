@@ -14,14 +14,17 @@ import java.util.ArrayList;
     
        
     public ArrayList<FlightInfo> flightsOfRoute;
+    public String from;
+    public String to;
     public String id="Route-";
 
-    public Route() {
-        this.flightsOfRoute=new ArrayList<FlightInfo>();
-        id="Route-";
-        /*for(FlightInfo f : flightsOfRoute){
+    public Route(ArrayList<FlightInfo> flightInfoArray) {
+        this.flightsOfRoute=flightInfoArray;
+        from=this.flightsOfRoute.get(0).flight.from;
+        to=this.flightsOfRoute.get(this.flightsOfRoute.size()-1).flight.to;
+        for(FlightInfo f : flightInfoArray){
             id+=f.id;
-        }*/
+        }
     }
     
     public void add(FlightInfo fi){
@@ -36,6 +39,7 @@ import java.util.ArrayList;
     public int size(){
         return flightsOfRoute.size();
     }
+    
     
     
     

@@ -6,10 +6,10 @@ package pck;
 
 import java.util.ArrayList;
 import java.util.Date;
-import javax.jws.WebService;
+import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 /**
  *
@@ -40,7 +40,7 @@ public class findPrice {
         if (listOfLinks.isEmpty()) {
             listOfLinks = Flight.getIndirectFlights(from, to);
         }
-        Route route = new Route();
+        ArrayList<FlightInfo> flights = new ArrayList<FlightInfo>();
         if (!listOfLinks.isEmpty()) {
             FlightsList myFl = null;
             
@@ -53,10 +53,11 @@ public class findPrice {
             for (Flight f : myFl.list) {
                 FlightInfo fi = FlightInfo.getFlightInfo(f);
                 if (fi.date.equals(myDate)) {
-                    route.add(fi);
+                    flights.add(fi);
                 }
             }
         }
+        Route route = new Route(flights);
         return route;
     }
     
@@ -76,13 +77,15 @@ public class findPrice {
         IYear = Integer.parseInt(date.split("/")[2]);
         Date myDate = new Date(IYear, IMonth, IDate);
 
-        Route route = new Route();
+        
+        ArrayList<FlightInfo> flightsInfoArr = new ArrayList<FlightInfo>();
         for (Flight f : flights.list) {
             FlightInfo fi = FlightInfo.getFlightInfo(f);
             if (fi.date.equals(myDate)) {
-                route.add(fi);
+                flightsInfoArr.add(fi);
             }
         }
+        Route route = new Route(flightsInfoArr);
         return route;
     }
     
