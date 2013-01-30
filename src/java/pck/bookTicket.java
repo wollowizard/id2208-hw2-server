@@ -4,8 +4,13 @@
  */
 package pck;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -29,11 +34,19 @@ public class bookTicket {
             throw new AuthenticationException();
         }
         
-        int IDate, IMonth, IYear;
-        IDate = Integer.parseInt(date.split("/")[0]);
-        IMonth = Integer.parseInt(date.split("/")[1]);
-        IYear = Integer.parseInt(date.split("/")[2]);
-        Date myDate = new Date(IYear, IMonth, IDate);
+        DateFormat format;
+        Date myDate=null;
+        format = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            myDate = (Date) format.parse(date);
+            /*int IDate, IMonth, IYear;
+            IDate = Integer.parseInt(date.split("/")[0]);
+            IMonth = Integer.parseInt(date.split("/")[1]);
+            IYear = Integer.parseInt(date.split("/")[2]);
+            Date myDate = new Date(IYear, IMonth, IDate);*/
+        } catch (ParseException ex) {
+            Logger.getLogger(bookTicket.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
         if (listOfLinks.isEmpty()) {
@@ -45,6 +58,7 @@ public class bookTicket {
             FlightsList myFl = null;
             
             for (FlightsList fl : listOfLinks) {
+                System.out.println(fl.id + " - " + flightsId);
                 if (fl.id.equals(flightsId)) {
                     myFl = fl;
                     break;
@@ -52,6 +66,7 @@ public class bookTicket {
             }
             for (Flight f : myFl.list) {
                 FlightInfo fi = FlightInfo.getFlightInfo(f);
+                System.out.println("DATE: "+fi.date.toString() + "\nMYDATE: "+myDate.toString());
                 if (fi.date.equals(myDate)) {
                     flightinfoarr.add(fi);
                 }

@@ -25,6 +25,8 @@ import java.util.ArrayList;
         to=this.flightsOfRoute.get(this.flightsOfRoute.size()-1).flight.to;
         for(FlightInfo f : flightInfoArray){
             id+=f.id;
+            flightsId+=f.flight.from;
+            flightsId+=f.flight.to;
         }
     }
     

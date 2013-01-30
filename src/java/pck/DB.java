@@ -26,49 +26,49 @@ public class DB {
 
     public static void populate() {
         Flight f = new Flight("Barcelona", "Stockholm");
-        FlightInfo f1 = new FlightInfo(new Date(2013, 2, 5), 100, 120.0, f);
+        FlightInfo f1 = new FlightInfo(new Date(113, 1, 5), 100, 120.0, f);
         flights.add(f);
         flightsInfo.add(f1);
 
         f = new Flight("Stockholm", "Berlin");
         
-        f1 = new FlightInfo(new Date(2013, 2, 5), 100, 110.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 100, 110.0, f);
         flights.add(f);
         flightsInfo.add(f1);
         
         f = new Flight("Barcelona", "Rome");
-        f1 = new FlightInfo(new Date(2013, 2, 5), 100, 110.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 100, 110.0, f);
         flights.add(f);
         flightsInfo.add(f1);
         
         f = new Flight("Rome", "Stockholm");
-        f1 = new FlightInfo(new Date(2013, 2, 5), 90, 150.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 90, 150.0, f);
         flights.add(f);
         flightsInfo.add(f1);
 
         f = new Flight("Rome", "Berlin");
-        f1 = new FlightInfo(new Date(2013, 2, 5), 90, 150.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 90, 150.0, f);
         flights.add(f);
         flightsInfo.add(f1);
 
         f = new Flight("Berlin", "Paris");
-        f1 = new FlightInfo(new Date(2013, 2, 5), 100, 125.5, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 100, 125.5, f);
         flights.add(f);
         flightsInfo.add(f1);
 
         f = new Flight("Rome", "Barcelona");
-        f1 = new FlightInfo(new Date(2013, 2, 5), 100, 120.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 100, 120.0, f);
         flights.add(f);
         flightsInfo.add(f1);
 
         f = new Flight("Barcelona", "Madrid");
 
-        f1 = new FlightInfo(new Date(2013, 2, 5), 100, 120.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 100, 120.0, f);
         flights.add(f);
         flightsInfo.add(f1);
 
         f = new Flight("Stockholm", "Barcelona");
-        f1 = new FlightInfo(new Date(2013, 2, 5), 100, 120.0, f);
+        f1 = new FlightInfo(new Date(113, 1, 5), 100, 120.0, f);
         flights.add(f);
         flightsInfo.add(f1);
         
